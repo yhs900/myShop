@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.showtimer.mapper.BaseMapper">
+
+
+	<!-- 查询所有的数据 -->
+	<select id="selectSystemConfig" resultType="com.showtimer.mapper.model.SystemConfig">
+		select * from
+		oa_system_config
+	</select>
+
+	<!-- 查询个人规则信息 -->
+	<select id="selectGroups" resultType="com.showtimer.domain.Groups"
+		parameterType="java.lang.Integer">
+		SELECT `oa_admin_group`.*,pivot.user_id AS pivot__user_id,pivot.group_id AS
+		pivot__group_id FROM `oa_admin_group` INNER JOIN `oa_admin_access`
+		`pivot` ON `pivot`.`group_id`=`oa_admin_group`.`id` WHERE
+		`pivot`.`user_id` = #{userId}
+	</select>
+
+</mapper>

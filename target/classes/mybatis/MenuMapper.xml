@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.showtimer.mapper.MenuMapper">
+
+	<!-- 通过状态查询所有的菜单信息 -->
+	<select id="selectMenuList" parameterType="java.lang.Integer"
+		resultType="com.showtimer.mapper.model.AdminMenu">
+		SELECT * FROM oa_admin_menu WHERE status = #{status}
+	</select>
+
+	<!-- 根据规则ID查询所关联的菜单数据 -->
+	<select id="selectMenuListByRuleIds" resultType="com.showtimer.mapper.model.AdminMenu">
+		SELECT * FROM
+		`oa_admin_menu` WHERE
+		<if test="ids != null">
+			`rule_id` IN
+			<foreach collection="ids" open="(" close=")" item="item"
+				separator=",">
+				#{item}
+			</foreach>
+			AND
+		</if>
+		`status` = #{status}
+	</select>
+
+
+
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.showtimer.mapper.UserMapper">
+
+	<!-- type为实体类Student，包名已经配置，可以直接写类名 -->
+    <!-- 通过ID查询单个用户数据 -->
+	<select id="selectUserById" parameterType="java.lang.Integer"
+		resultType="com.showtimer.mapper.model.AdminUser">
+		select * from oa_admin_user where id = #{id}
+	</select>
+    <!-- 查询所有的数据 -->
+	<select id="selectByUser" resultType="com.showtimer.mapper.model.AdminUser">
+		select * from oa_admin_user
+	</select>
+	
+	<!-- 用户名查询用户 -->
+    <select id="selectUserByUserName" resultType="com.showtimer.mapper.model.AdminUser"
+    parameterType="java.lang.String">
+    select * from oa_admin_user where username = #{userName}
+    </select>
+
+
+</mapper>
